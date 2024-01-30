@@ -1,0 +1,7 @@
+node_modules
+*.test.*
+jest.config.js
+babel.config.js
+metro.config.js
+packagehash.txt
+.eslintrc.js
