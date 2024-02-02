@@ -1,5 +1,5 @@
-import { HomePage } from '../../../modules/home';
-import { NewCard } from '../../../modules/new-card';
+import { HomePage } from '@app/modules/home';
+import { NewCard } from '@app/modules/new-card';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();

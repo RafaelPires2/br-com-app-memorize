@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackRoutes } from './stack-routes';
-import { AccountPage } from '../../../modules/account/account.page';
+import { AccountPage } from '@app/modules/account';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
