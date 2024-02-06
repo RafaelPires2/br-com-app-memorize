@@ -153,7 +153,7 @@ export const commonTheme: BaseTheme = {
   },
   color,
   button: {
-    height: 59,
+    height: 56,
     smallHeight: 44,
     iconSize: 20,
   },
