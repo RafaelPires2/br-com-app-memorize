@@ -6,10 +6,10 @@ const Stack = createNativeStackNavigator();
 
 export const StackRoutes = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="home-page">
-      <Stack.Screen name="new-card" component={NewCard} />
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="homePage">
+      <Stack.Screen name="newCard" component={NewCard} options={{ animation: 'none' }} />
 
-      <Stack.Screen name="home-page" component={HomePage} />
+      <Stack.Screen name="homePage" component={HomePage} />
     </Stack.Navigator>
   );
 };
