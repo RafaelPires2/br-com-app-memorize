@@ -23,10 +23,11 @@ export const TabBarButton = styled.TouchableOpacity`
 
 interface TabBarTextStylesProps {
   isFocused?: boolean;
+  color?: string;
 }
 
 export const TabBarText = styled.Text<TabBarTextStylesProps>`
-  ${({ theme, isFocused }) => css`
-    color: ${isFocused ? theme.color.secondaryDark : theme.color.grayMedium};
+  ${({ color, theme }) => css`
+    color: ${!!color ? color : theme.color.grayMedium};
   `}
 `;

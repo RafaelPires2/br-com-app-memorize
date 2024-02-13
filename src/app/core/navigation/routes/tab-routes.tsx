@@ -25,7 +25,11 @@ export const TabRoutes = () => {
         component={StackRoutes}
         options={{
           title: 'Início',
-          tabBarLabel: ({ focused, children }) => <TabBarText isFocused={focused}>{children}</TabBarText>,
+          tabBarLabel: ({ focused, children, color }) => (
+            <TabBarText color={color} isFocused={focused}>
+              {children}
+            </TabBarText>
+          ),
           tabBarIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
         }}
       />
@@ -35,7 +39,11 @@ export const TabRoutes = () => {
         component={NewCard}
         options={{
           title: '',
-          tabBarLabel: ({ focused, children }) => <TabBarText isFocused={focused}>{children}</TabBarText>,
+          tabBarLabel: ({ focused, children, color }) => (
+            <TabBarText color={color} isFocused={focused}>
+              {children}
+            </TabBarText>
+          ),
           tabBarIcon: () => <ButtonTabBarPlus />,
         }}
       />
@@ -45,7 +53,11 @@ export const TabRoutes = () => {
         component={AccountPage}
         options={{
           title: 'Conta',
-          tabBarLabel: ({ focused, children }) => <TabBarText isFocused={focused}>{children}</TabBarText>,
+          tabBarLabel: ({ focused, children, color }) => (
+            <TabBarText color={color} isFocused={focused}>
+              {children}
+            </TabBarText>
+          ),
           tabBarIcon: ({ color, size }) => <Feather name="user" size={size} color={color} />,
         }}
       />
