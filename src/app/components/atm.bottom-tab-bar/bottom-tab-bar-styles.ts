@@ -21,8 +21,12 @@ export const TabBarButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const TabBarText = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.color.grayMedium};
+interface TabBarTextStylesProps {
+  isFocused?: boolean;
+}
+
+export const TabBarText = styled.Text<TabBarTextStylesProps>`
+  ${({ theme, isFocused }) => css`
+    color: ${isFocused ? theme.color.secondaryDark : theme.color.grayMedium};
   `}
 `;

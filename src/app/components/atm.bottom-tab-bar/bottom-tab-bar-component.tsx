@@ -1,25 +1,62 @@
 import React from 'react';
 import { commonTheme } from '@atomic/obj.theme';
-import { Feather } from 'react-native-vector-icons';
-import { ButtonTabBarPlus } from '@app/components/atm.button-tab-bar-plus';
 import { BottomTabBarWrapper, TabBarButton, TabBarText } from './bottom-tab-bar-styles';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
 const theme = commonTheme;
 
-export const BottomTabBar = ({ navigation }) => {
+export const BottomTabBar = ({ navigation, state, descriptors }: BottomTabBarProps) => {
   return (
     <BottomTabBarWrapper>
-      <TabBarButton onPress={() => navigation.navigate('home')}>
-        <Feather name="home" size={theme.iconSize.medium} color={theme.color.grayMedium} />
-        <TabBarText>Início</TabBarText>
-      </TabBarButton>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
 
-      <ButtonTabBarPlus onTap={() => console.log('click')} />
+        const isFocused = state.index === index;
 
-      <TabBarButton onPress={() => navigation.navigate('account')}>
-        <Feather name="user" size={theme.iconSize.medium} color={theme.color.grayMedium} />
-        <TabBarText>Conta</TabBarText>
-      </TabBarButton>
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name, route.params);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        const label = options.title ?? route.name;
+
+        return (
+          <TabBarButton onPress={onPress} onLongPress={onLongPress} key={index}>
+            {options.tabBarIcon?.({
+              focused: isFocused,
+              color: isFocused ? theme.color.secondaryDark : theme.color.grayMedium,
+              size: theme.iconSize.medium,
+            })}
+
+            <TabBarText isFocused={isFocused}>
+              {!!options.tabBarLabel
+                ? typeof options.tabBarLabel === 'string'
+                  ? options.tabBarLabel
+                  : options.tabBarLabel({
+                      children: label,
+                      color: isFocused ? theme.color.secondaryDark : theme.color.grayMedium,
+                      focused: isFocused,
+                      position: 'below-icon',
+                    })
+                : label}
+            </TabBarText>
+          </TabBarButton>
+        );
+      })}
     </BottomTabBarWrapper>
   );
 };

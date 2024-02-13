@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native';
 
 const SIZE_BUTTON_PLUS = '72px';
-const MARGIN_BUTTON_PLUS = '10%';
+const MARGIN_BUTTON_PLUS = '30%';
 
 export const ButtonTabBarPlusStyle = styled.TouchableOpacity`
   ${({ theme }) => css`
