@@ -5,15 +5,15 @@ import { CloseButton } from '@atomic/mol.close-button';
 import { VBox, VSeparator } from '@atomic/obj.grid';
 
 interface BottomSheetProps {
-  onShowModal: () => void;
+  onCloseModal: () => void;
   children: ReactNode;
   visible: boolean;
 }
 
-export const BottomSheet = ({ onShowModal, visible, children }: BottomSheetProps) => {
+export const BottomSheet = ({ onCloseModal, visible, children }: BottomSheetProps) => {
   return (
-    <Modal visible={visible} onRequestClose={() => onShowModal()} animationType="slide" presentationStyle="formSheet">
-      <CloseButton onTap={() => onShowModal()} />
+    <Modal visible={visible} onRequestClose={() => onCloseModal()} animationType="slide" presentationStyle="formSheet">
+      <CloseButton onTap={() => onCloseModal()} />
       <Divider />
 
       <VBox>
