@@ -1,6 +1,5 @@
 import React from 'react';
 import { StackRoutes } from './stack-routes';
-import { commonTheme } from '@atomic/obj.theme';
 import { NewCard } from '@app/modules/new-card';
 import { AccountPage } from '@app/modules/account';
 import { Feather } from 'react-native-vector-icons';
@@ -9,13 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ButtonTabBarPlus } from '@app/components/atm.button-tab-bar-plus';
 import { TabBarText } from '@app/components/atm.bottom-tab-bar/bottom-tab-bar-styles';
 
-export type RouteList = {
-  home: undefined;
-  account: undefined;
-  newCard: undefined;
-};
-
-const Tab = createBottomTabNavigator<RouteList>();
+const Tab = createBottomTabNavigator();
 
 export const TabRoutes = () => {
   return (
