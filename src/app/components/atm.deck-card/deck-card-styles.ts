@@ -1,3 +1,4 @@
+import { ShadowCss } from '@atomic/atm.shadow/shadow-component';
 import styled, { css } from 'styled-components/native';
 
 const HEIGHT_CARD = '60px';
@@ -10,5 +11,6 @@ export const DeckCardStyles = styled.TouchableOpacity`
     background-color: ${theme.color.grayXXLight};
     border-radius: ${theme.border.radiusXSmall};
     justify-content: center;
+    ${ShadowCss.medium}
   `}
 `;

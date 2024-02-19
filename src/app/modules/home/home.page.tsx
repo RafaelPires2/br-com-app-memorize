@@ -2,7 +2,6 @@ import React from 'react';
 import { VBox, VSeparator } from '@atomic/obj.grid';
 import { DeckCard } from '@app/components/atm.deck-card';
 
-// TODO: Criar sombra para os cards
 // TODO: Refatorar tabs e stacks
 // TODO: Usar Json Server para api
 // TODO: Flatlist na home
