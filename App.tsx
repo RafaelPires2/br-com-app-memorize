@@ -3,7 +3,7 @@ import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { commonTheme } from '@atomic/obj.theme';
 import { ThemeProvider } from 'styled-components';
-import { Routes } from './src/app/core/navigation/routes';
+import { AppRoutes } from './src/app/core/navigation/routes';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
       <SafeAreaProvider>
         <SafeAreaView />
         <StatusBar style="auto" />
-        <Routes />
+        <AppRoutes />
       </SafeAreaProvider>
     </ThemeProvider>
   );

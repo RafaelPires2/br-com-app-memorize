@@ -1,1 +1,1 @@
-export * from './new-card';
+export * from './new-card.page';
