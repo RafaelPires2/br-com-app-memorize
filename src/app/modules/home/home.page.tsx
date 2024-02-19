@@ -11,7 +11,7 @@ export const HomePage = () => {
     <>
       <VSeparator />
       <VBox>
-        <DeckCard title="Irregular Verbs" onTap={() => console.log('click')} />
+        <DeckCard title="Irregular Verbs" amountCards={6} onTap={() => console.log('click')} />
       </VBox>
     </>
   );
