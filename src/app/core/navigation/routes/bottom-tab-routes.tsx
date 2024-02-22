@@ -1,6 +1,7 @@
 import React from 'react';
-import { StackRoutes } from './stack-routes';
-import { NewCard } from '@app/modules/new-card';
+import { HomeRoutes } from './home-routes';
+
+import { NewCardPage } from '@app/modules/new-card';
 import { AccountPage } from '@app/modules/account';
 import { Feather } from 'react-native-vector-icons';
 import { BottomTabBar } from '@app/components/atm.bottom-tab-bar';
@@ -8,14 +9,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ButtonTabBarPlus } from '@app/components/atm.button-tab-bar-plus';
 import { TabBarText } from '@app/components/atm.bottom-tab-bar/bottom-tab-bar-styles';
 
-const Tab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator();
 
-export const TabRoutes = () => {
+export const BottomTabRoutes = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={BottomTabBar}>
-      <Tab.Screen
-        name="home"
-        component={StackRoutes}
+    <BottomTab.Navigator screenOptions={{ headerShown: false }} tabBar={BottomTabBar}>
+      <BottomTab.Screen
+        name="homeRoutes"
+        component={HomeRoutes}
         options={{
           title: 'Início',
           tabBarLabel: ({ focused, children, color }) => (
@@ -27,9 +28,9 @@ export const TabRoutes = () => {
         }}
       />
 
-      <Tab.Screen
+      <BottomTab.Screen
         name="newCard"
-        component={NewCard}
+        component={NewCardPage}
         options={{
           title: '',
           tabBarLabel: ({ focused, children, color }) => (
@@ -41,8 +42,8 @@ export const TabRoutes = () => {
         }}
       />
 
-      <Tab.Screen
-        name="account"
+      <BottomTab.Screen
+        name="accountRoutes"
         component={AccountPage}
         options={{
           title: 'Conta',
@@ -54,6 +55,6 @@ export const TabRoutes = () => {
           tabBarIcon: ({ color, size }) => <Feather name="user" size={size} color={color} />,
         }}
       />
-    </Tab.Navigator>
+    </BottomTab.Navigator>
   );
 };
