@@ -22,11 +22,13 @@ export default function App() {
     return;
   }
 
+  const theme = commonTheme;
+
   return (
     <ThemeProvider theme={commonTheme}>
       <SafeAreaProvider>
-        <SafeAreaView />
-        <StatusBar style="auto" />
+        <SafeAreaView style={{ backgroundColor: theme.color.primaryDark }} />
+        <StatusBar style="light" translucent />
         <AppRoutes />
       </SafeAreaProvider>
     </ThemeProvider>
