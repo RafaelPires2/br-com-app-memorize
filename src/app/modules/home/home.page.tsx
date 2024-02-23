@@ -1,10 +1,9 @@
 import React from 'react';
-
+import { HomeHeader } from '@app/components/atm.header';
 import { DeckCard } from '@app/components/atm.deck-card';
 import { useNavigation } from '@react-navigation/native';
-import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
-import { HomeHeader } from '@app/components/atm.header';
 import { VBox, VSeparator } from '@atomic/obj.grid/grid.component';
+import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
 
 // TODO: Refatorar tabs e stacks
 // TODO: Usar Json Server para api
