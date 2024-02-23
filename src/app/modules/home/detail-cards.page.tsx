@@ -1,6 +1,7 @@
 import React from 'react';
-import { VBox, VSeparator } from '@atomic/obj.grid';
+
 import { DeckCard } from '@app/components/atm.deck-card';
+import { VBox, VSeparator } from '@atomic/obj.grid/grid.component';
 
 export const DetailCardsPage = () => {
   return (
