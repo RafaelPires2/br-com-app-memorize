@@ -2,6 +2,7 @@ import React from 'react';
 import { H2 } from '@atomic/atm.typography';
 import { appStrings } from '@app/app-strings';
 import { commonTheme } from '@atomic/obj.theme';
+import { CardType } from '@app/data/queries/home';
 import { Feather } from 'react-native-vector-icons';
 import { DeckCardStyles } from './deck-card-styles';
 import { HBox, VBox, VSeparator } from '@atomic/obj.grid/grid.component';
@@ -12,10 +13,13 @@ const strings = appStrings.homePage;
 interface DeckCardProps {
   onTap: () => void;
   title: string;
-  amountCards: number;
+  deckId: string;
+  dataCards: CardType[];
 }
 
-export const DeckCard = ({ onTap, title, amountCards }: DeckCardProps) => {
+export const DeckCard = ({ onTap, title, deckId, dataCards }: DeckCardProps) => {
+  const numberOfCardsFromDeck = dataCards?.filter(card => card.idDeck === deckId).length;
+
   return (
     <>
       <DeckCardStyles onPress={() => onTap()}>
@@ -24,7 +28,7 @@ export const DeckCard = ({ onTap, title, amountCards }: DeckCardProps) => {
           <HBox>
             <HBox.Item>
               <H2 numberOfLines={1}>
-                {title} {strings.deckCard.amountOfItems(amountCards)}
+                {title} {strings.deckCard.amountOfItems(numberOfCardsFromDeck)}
               </H2>
             </HBox.Item>
             <HBox.Separator />
