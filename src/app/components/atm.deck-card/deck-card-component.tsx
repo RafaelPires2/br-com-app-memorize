@@ -17,21 +17,25 @@ interface DeckCardProps {
 
 export const DeckCard = ({ onTap, title, amountCards }: DeckCardProps) => {
   return (
-    <DeckCardStyles onPress={() => onTap()}>
-      <VSeparator />
-      <VBox>
-        <HBox>
-          <HBox.Item>
-            <H2>
-              {title} {strings.deckCard.amountOfItems(amountCards)}
-            </H2>
-          </HBox.Item>
-          <HBox.Item vAlign="center" hAlign="flex-end">
-            <Feather name="arrow-right" size={theme.iconSize.small} color={theme.color.gray} />
-          </HBox.Item>
-        </HBox>
-      </VBox>
-      <VSeparator />
-    </DeckCardStyles>
+    <>
+      <DeckCardStyles onPress={() => onTap()}>
+        <VSeparator />
+        <VBox>
+          <HBox>
+            <HBox.Item>
+              <H2 numberOfLines={1}>
+                {title} {strings.deckCard.amountOfItems(amountCards)}
+              </H2>
+            </HBox.Item>
+            <HBox.Separator />
+            <HBox.Item vAlign="center" hAlign="flex-end" wrap>
+              <Feather name="arrow-right" size={theme.iconSize.small} color={theme.color.gray} />
+            </HBox.Item>
+          </HBox>
+        </VBox>
+        <VSeparator />
+      </DeckCardStyles>
+      <VSeparator spacing="half" />
+    </>
   );
 };
