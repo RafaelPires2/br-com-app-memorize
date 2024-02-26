@@ -1,0 +1,27 @@
+{
+  "decks": [
+    { "id": "1", "title": "Verb to Be" },
+    { "id": "2", "title": "Irregular Verbs" },
+    { "id": "3", "title": "Verbs used more" },
+    { "id": "4", "title": "React-Native" },
+    { "id": "5", "title": "Array Method" }
+  ],
+  "cards": [
+    { "id": "1", "front": "Am", "back": "Ser, estar", "idDeck": "1" },
+    { "id": "2", "front": "Is", "back": "É", "idDeck": "1" }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Rafael Pires",
+      "password": "rafa1234",
+      "email": "rafa@rafa.com"
+    },
+    {
+      "id": "2",
+      "name": "Gabriel Santos",
+      "password": "gabriel1234",
+      "email": "gabriel@gmail.com"
+    }
+  ]
+}
