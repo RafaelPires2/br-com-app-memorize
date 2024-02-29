@@ -11,6 +11,8 @@ interface UserProps {
   idUser: string;
 }
 
+// TODO: Fazer hook para o axios.get
+
 export const useUserQuery = ({ idUser }: UserProps) => {
   const [user, setUser] = useState<UserType>();
 
