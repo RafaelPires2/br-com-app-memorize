@@ -1,5 +1,8 @@
 export const appStrings = {
-  button: {},
+  button: {
+    send: 'Enviar',
+    loading: 'Carregando...',
+  },
 
   homePage: {
     separatorFlatlist: 'Todos os itens foram carregados',
