@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Button, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Divider } from '@atomic/atm.divider';
 import { appStrings } from '@app/app-strings';
 import { Checkbox } from 'react-native-paper';
 import { commonTheme } from '@atomic/obj.theme';
 import { HBox, VSeparator } from '@atomic/obj.grid';
 import { H1, H2, H3 } from '@atomic/atm.typography';
+import { Button } from '@app/components/atm.button';
 import { useDecksQuery } from '@app/data/queries/home';
+import { CheckBoxWrapper } from './add-new-card-styles';
 import { CheckBoxCircleStyle } from '@app/components/atm.check-box';
 import { SelectDropdownButton } from '@app/components/atm.select-button';
 import { BoxInputTextStyle, InputTextStyle } from '@app/components/atm.input-text';
-import { CheckBoxWrapper } from './add-new-card-styles';
 
 const theme = commonTheme;
 const strings = appStrings.newCardPage;
@@ -76,48 +77,52 @@ export const AddNewCard = () => {
       <VSeparator />
       <Divider />
       <VSeparator />
-      {checkedNewCard ? (
+      <ScrollView>
+        {checkedNewCard ? (
+          <>
+            <H2>{strings.nameNewDeck}</H2>
+            <InputTextStyle
+              placeholderTextColor={theme.color.grayMedium}
+              onChangeText={text => onChangeTextState('deck', text)}
+              value={textState.deck}
+              placeholder={strings.placeholderDeck}
+            />
+          </>
+        ) : (
+          <>
+            <H2>{strings.changeDeck}</H2>
+            <SelectDropdownButton data={decks} onTap={onChangeTextState} />
+          </>
+        )}
         <>
-          <H2>{strings.nameNewDeck}</H2>
-          <InputTextStyle
+          <VSeparator />
+
+          <H3 mb>{strings.front}</H3>
+          <BoxInputTextStyle
             placeholderTextColor={theme.color.grayMedium}
-            onChangeText={text => onChangeTextState('deck', text)}
-            value={textState.deck}
-            placeholder={strings.placeholderDeck}
+            onChangeText={text => onChangeTextState('frontCard', text)}
+            value={textState.frontCard}
+            placeholder={strings.placeholderFront}
+            multiline={true}
+            textAlignVertical="top"
           />
+
+          <VSeparator />
+
+          <H3 mb>{strings.response}</H3>
+          <BoxInputTextStyle
+            placeholderTextColor={theme.color.grayMedium}
+            onChangeText={text => onChangeTextState('backCard', text)}
+            value={textState.backCard}
+            placeholder={strings.placeholderResponse}
+            multiline={true}
+            textAlignVertical="top"
+          />
+
+          <VSeparator spacing="double" />
+          <Button.CallToAction text={appStrings.button.send} onTap={() => console.log('foi')} />
         </>
-      ) : (
-        <>
-          <H2>{strings.changeDeck}</H2>
-          <SelectDropdownButton data={decks} onTap={onChangeTextState} />
-        </>
-      )}
-      <>
-        <VSeparator />
-
-        <H3 mb>{strings.front}</H3>
-        <BoxInputTextStyle
-          placeholderTextColor={theme.color.grayMedium}
-          onChangeText={text => onChangeTextState('frontCard', text)}
-          value={textState.frontCard}
-          placeholder={strings.placeholderFront}
-          multiline={true}
-          textAlignVertical="top"
-        />
-
-        <VSeparator />
-
-        <H3 mb>{strings.response}</H3>
-        <BoxInputTextStyle
-          placeholderTextColor={theme.color.grayMedium}
-          onChangeText={text => onChangeTextState('backCard', text)}
-          value={textState.backCard}
-          placeholder={strings.placeholderResponse}
-          multiline={true}
-          textAlignVertical="top"
-        />
-        <Button title="Enviar" onPress={onPressSubmit} />
-      </>
+      </ScrollView>
     </>
   );
 };
