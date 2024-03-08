@@ -91,7 +91,7 @@ export const AddNewCard = () => {
         ) : (
           <>
             <H2>{strings.changeDeck}</H2>
-            <SelectDropdownButton data={decks} onTap={onChangeTextState} />
+            <SelectDropdownButton data={decks || []} onTap={onChangeTextState} />
           </>
         )}
         <>

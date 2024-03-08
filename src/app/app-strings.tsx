@@ -2,6 +2,7 @@ export const appStrings = {
   button: {
     send: 'Enviar',
     loading: 'Carregando...',
+    loadingAgain: 'Carregar novamente',
   },
 
   homePage: {

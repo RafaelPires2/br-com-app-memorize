@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import { useGetQuery } from '@app/core/axios/axios-query.hook';
 
 interface UserType {
   id: string;
@@ -11,26 +11,15 @@ interface UserProps {
   idUser: string;
 }
 
-// TODO: Fazer hook para o axios.get
-
 export const useUserQuery = ({ idUser }: UserProps) => {
   const [user, setUser] = useState<UserType>();
 
+  const { data } = useGetQuery<UserType[]>(`http://localhost:3000/users?id=${idUser}`);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response: AxiosResponse<UserType[]> = await axios.get(`http://localhost:3000/users?id=${idUser}`);
-        const data = response.data;
-        const currentUser = data.find(u => u.id === idUser);
-
-        setUser(currentUser);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    const currentUser = data?.find(u => u.id === idUser);
+    setUser(currentUser);
+  }, [data]);
 
   return { user };
 };
