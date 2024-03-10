@@ -12,14 +12,22 @@ import { CheckBoxWrapper } from './add-new-card-styles';
 import { CheckBoxCircleStyle } from '@app/components/atm.check-box';
 import { SelectDropdownButton } from '@app/components/atm.select-button';
 import { BoxInputTextStyle, InputTextStyle } from '@app/components/atm.input-text';
+import axios from 'axios';
 
 const theme = commonTheme;
 const strings = appStrings.newCardPage;
 
 export const AddNewCard = () => {
-  const { decks } = useDecksQuery();
+  const { decks, loading } = useDecksQuery();
   const [checkedNewCard, setCheckedNewCard] = useState(true);
   const [textState, setTextState] = useState({ deck: '', frontCard: '', backCard: '' });
+
+  const isNewDeckCadaster = decks?.every(deck => {
+    const deckTitle = deck.title.toLocaleLowerCase();
+    const inputTextDeck = textState.deck.toLocaleLowerCase();
+
+    return deckTitle !== inputTextDeck && inputTextDeck !== '';
+  });
 
   const onChangeTextState = (key: string, value: string) => {
     setTextState(prevState => ({
@@ -28,7 +36,23 @@ export const AddNewCard = () => {
     }));
   };
 
+  const newDeckPost = () => axios.post('http://localhost:3000/decks', { title: textState.deck });
+
+  const newCardPost = () =>
+    axios
+      .post('http://localhost:3000/cards', {
+        front: textState.frontCard,
+        back: textState.backCard,
+      })
+      .then(res => console.log('Sucesso', res))
+      .catch(err => console.log('Erro', err));
+
   const onPressSubmit = () => {
+    if (isNewDeckCadaster) {
+      newDeckPost();
+      newCardPost();
+    }
+    console.log('executou');
     console.log('State:', textState);
   };
 
@@ -120,7 +144,7 @@ export const AddNewCard = () => {
           />
 
           <VSeparator spacing="double" />
-          <Button.CallToAction text={appStrings.button.send} onTap={() => console.log('foi')} />
+          <Button.CallToAction text={appStrings.button.send} loading={loading} onTap={() => onPressSubmit()} />
         </>
       </ScrollView>
     </>
