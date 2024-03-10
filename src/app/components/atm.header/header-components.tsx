@@ -23,43 +23,46 @@ interface HomeHeaderProps {
 
 export const HomeHeader = ({ name, amountDecks, amountCards, progress }: HomeHeaderProps) => {
   return (
-    <HeaderStyles>
-      <VBox>
-        <HBox>
-          <HBox.Item vAlign="center" wrap>
-            <ImageIcon source={Asset.icon.Logo} size="large" />
-          </HBox.Item>
-          <HBox.Separator />
-          <HBox.Item hAlign="flex-start" vAlign="center">
-            <Body center color="white">
-              {formattedCurrentDate()}
-            </Body>
-            <H3 center color="white">
-              {strings.header.welcome(name)}
-            </H3>
-          </HBox.Item>
-        </HBox>
-        <VSeparator spacing="double" />
+    <>
+      <HeaderStyles>
+        <VBox>
+          <HBox>
+            <HBox.Item vAlign="center" wrap>
+              <ImageIcon source={Asset.icon.Logo} size="large" />
+            </HBox.Item>
+            <HBox.Separator />
+            <HBox.Item hAlign="flex-start" vAlign="center">
+              <Body center color="white">
+                {formattedCurrentDate()}
+              </Body>
+              <H3 center color="white">
+                {strings.header.welcome(name)}
+              </H3>
+            </HBox.Item>
+          </HBox>
+          <VSeparator spacing="double" />
 
-        <HBox>
-          <HBox.Item>
-            <H3 color="white">{strings.header.amountDecks(amountDecks)}</H3>
-            <H3 color="white">{strings.header.amountCards(amountCards)}</H3>
-          </HBox.Item>
-          <HBox.Item>
-            <H3 color="white">{strings.header.progress}</H3>
-            <VSeparator spacing="half" />
-            <Progress.Bar
-              progress={progress}
-              height={HEIGHT_PROGRESS_BAR}
-              color={theme.color.secondary}
-              borderColor={theme.color.secondaryDark}
-            />
-          </HBox.Item>
-        </HBox>
-      </VBox>
+          <HBox>
+            <HBox.Item>
+              <H3 color="white">{strings.header.amountDecks(amountDecks)}</H3>
+              <H3 color="white">{strings.header.amountCards(amountCards)}</H3>
+            </HBox.Item>
+            <HBox.Item>
+              <H3 color="white">{strings.header.progress}</H3>
+              <VSeparator spacing="half" />
+              <Progress.Bar
+                progress={progress}
+                height={HEIGHT_PROGRESS_BAR}
+                color={theme.color.secondary}
+                borderColor={theme.color.secondaryDark}
+              />
+            </HBox.Item>
+          </HBox>
+        </VBox>
 
+        <VSeparator />
+      </HeaderStyles>
       <VSeparator />
-    </HeaderStyles>
+    </>
   );
 };
