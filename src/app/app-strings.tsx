@@ -5,6 +5,10 @@ export const appStrings = {
     loadingAgain: 'Carregar novamente',
   },
 
+  emptyState: {
+    emptyStateDeck: 'Ainda não existe nenhum Deck cadastrado. Cadastre seu primeiro Deck!',
+  },
+
   homePage: {
     separatorFlatlist: 'Todos os itens foram carregados',
 
