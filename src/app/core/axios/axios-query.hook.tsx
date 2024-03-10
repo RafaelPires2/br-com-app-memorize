@@ -1,43 +1,41 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface QueryResult<TData> {
   data: TData;
   loading: boolean;
-  error: boolean;
-  errorMessage: string;
+  error: Error | null;
   refetch?: () => void;
 }
 
 export function useGetQuery<TData = any>(url: string): QueryResult<TData> {
-  const [data, setData] = useState();
-  const [error, setError] = useState(false);
+  const [data, setData] = useState<TData | null>();
+  const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
-  const [refetchState, setRefetchState] = useState(false);
+  const [trigger, setTrigger] = useState(false);
 
-  const refetch = () => {
-    setRefetchState(!refetchState);
-  };
-
-  useEffect(() => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url);
-        setError(false);
-        setData(response.data);
-      } catch (error) {
-        setError(true);
-        setErrorMessage(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      const response = await axios.get(url);
+      setError(null);
+      setData(response.data);
+    } catch (error) {
+      setError(error);
+      setData(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
+  useEffect(() => {
     fetchData();
-  }, [refetchState]);
+  }, [url, trigger]);
 
-  return { data, error, loading, refetch, errorMessage };
+  const refetch = () => {
+    setTrigger(!trigger);
+  };
+
+  return { data, error, loading, refetch };
 }
