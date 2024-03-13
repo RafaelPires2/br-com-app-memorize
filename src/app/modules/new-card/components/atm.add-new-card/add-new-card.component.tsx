@@ -1,59 +1,78 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Divider } from '@atomic/atm.divider';
 import { appStrings } from '@app/app-strings';
 import { Checkbox } from 'react-native-paper';
 import { commonTheme } from '@atomic/obj.theme';
+import { H1, H3 } from '@atomic/atm.typography';
 import { HBox, VSeparator } from '@atomic/obj.grid';
-import { H1, H2, H3 } from '@atomic/atm.typography';
 import { Button } from '@app/components/atm.button';
+import { useForm, Controller } from 'react-hook-form';
 import { useDecksQuery } from '@app/data/queries/home';
 import { CheckBoxWrapper } from './add-new-card-styles';
 import { CheckBoxCircleStyle } from '@app/components/atm.check-box';
 import { SelectDropdownButton } from '@app/components/atm.select-button';
-import { BoxInputTextStyle, InputTextStyle } from '@app/components/atm.input-text';
-import axios from 'axios';
+import { BoxInputText, InputText } from '@app/components/atm.input-text';
+
+interface AddNewCardProps {
+  deck: string | number;
+  frontCard: string | number;
+  backCard: string | number;
+  deckSelect: string | number;
+}
 
 const theme = commonTheme;
 const strings = appStrings.newCardPage;
 
 export const AddNewCard = () => {
-  const { decks, loading } = useDecksQuery();
+  const { decks } = useDecksQuery();
   const [checkedNewCard, setCheckedNewCard] = useState(true);
-  const [textState, setTextState] = useState({ deck: '', frontCard: '', backCard: '' });
+  const [deckIsEqual, setDeckIsEqual] = useState(false);
+
+  const { control, handleSubmit, formState, reset, watch } = useForm<AddNewCardProps>({
+    defaultValues: {
+      deck: '',
+      deckSelect: '',
+      frontCard: '',
+      backCard: '',
+    },
+    mode: 'onChange',
+  });
+
+  const fieldDeck = watch('deck');
+  console.log(fieldDeck);
 
   const isNewDeckCadaster = decks?.every(deck => {
     const deckTitle = deck.title.toLocaleLowerCase();
-    const inputTextDeck = textState.deck.toLocaleLowerCase();
+    const inputTextDeck = fieldDeck.toString().toLocaleLowerCase();
 
-    return deckTitle !== inputTextDeck && inputTextDeck !== '';
+    return deckTitle !== inputTextDeck;
   });
 
-  const onChangeTextState = (key: string, value: string) => {
-    setTextState(prevState => ({
-      ...prevState,
-      [key]: value,
-    }));
-  };
+  const newDeckPost = (data: AddNewCardProps) =>
+    axios.post('http://localhost:3000/decks', {
+      title: data?.deck ? data?.deck : data?.deckSelect,
+    });
 
-  const newDeckPost = () => axios.post('http://localhost:3000/decks', { title: textState.deck });
-
-  const newCardPost = () =>
+  const newCardPost = (data: AddNewCardProps) =>
     axios
       .post('http://localhost:3000/cards', {
-        front: textState.frontCard,
-        back: textState.backCard,
+        front: data?.frontCard,
+        back: data?.backCard,
       })
-      .then(res => console.log('Sucesso', res))
+      .then(res => console.log('Sucesso'))
       .catch(err => console.log('Erro', err));
 
-  const onPressSubmit = () => {
-    if (isNewDeckCadaster) {
-      newDeckPost();
-      newCardPost();
+  const onSubmit = (data: AddNewCardProps) => {
+    if (isNewDeckCadaster || data.deckSelect) {
+      newDeckPost(data);
+      newCardPost(data);
+
+      reset();
+    } else {
+      setDeckIsEqual(true);
     }
-    console.log('executou');
-    console.log('State:', textState);
   };
 
   return (
@@ -69,6 +88,7 @@ export const AddNewCard = () => {
                 color={theme.color.secondaryDark}
                 status={checkedNewCard ? 'checked' : 'unchecked'}
                 onPress={() => {
+                  reset();
                   setCheckedNewCard(!checkedNewCard);
                 }}
               />
@@ -86,6 +106,7 @@ export const AddNewCard = () => {
                 color={theme.color.secondaryDark}
                 status={!checkedNewCard ? 'checked' : 'unchecked'}
                 onPress={() => {
+                  reset();
                   setCheckedNewCard(!checkedNewCard);
                 }}
               />
@@ -101,50 +122,111 @@ export const AddNewCard = () => {
       <VSeparator />
       <Divider />
       <VSeparator />
+
       <ScrollView>
         {checkedNewCard ? (
           <>
-            <H2>{strings.nameNewDeck}</H2>
-            <InputTextStyle
-              placeholderTextColor={theme.color.grayMedium}
-              onChangeText={text => onChangeTextState('deck', text)}
-              value={textState.deck}
-              placeholder={strings.placeholderDeck}
+            <Controller
+              control={control}
+              name="deck"
+              rules={{
+                required: appStrings.validators.required,
+                minLength: {
+                  value: 3,
+                  message: appStrings.validators.requiredThreeLetter,
+                },
+                maxLength: {
+                  value: 30,
+                  message: appStrings.validators.requiredThirtyLetter,
+                },
+              }}
+              render={({ field, fieldState }) => (
+                <InputText
+                  label={<H3>{strings.nameNewDeck}</H3>}
+                  placeholder={strings.placeholderDeck}
+                  value={field.value}
+                  onChangeText={field.onChange}
+                  errorMessage={deckIsEqual ? appStrings.validators.thisDeckAlreadyExists : fieldState?.error?.message}
+                />
+              )}
             />
           </>
         ) : (
           <>
-            <H2>{strings.changeDeck}</H2>
-            <SelectDropdownButton data={decks || []} onTap={onChangeTextState} />
+            <Controller
+              control={control}
+              name="deckSelect"
+              rules={{
+                required: appStrings.validators.required,
+              }}
+              render={({ field, fieldState }) => (
+                <SelectDropdownButton
+                  data={decks || []}
+                  onTap={field.onChange}
+                  label={<H3 mb>{strings.changeDeck}</H3>}
+                  errorMessage={fieldState?.error?.message}
+                />
+              )}
+            />
           </>
         )}
         <>
-          <VSeparator />
-
-          <H3 mb>{strings.front}</H3>
-          <BoxInputTextStyle
-            placeholderTextColor={theme.color.grayMedium}
-            onChangeText={text => onChangeTextState('frontCard', text)}
-            value={textState.frontCard}
-            placeholder={strings.placeholderFront}
-            multiline={true}
-            textAlignVertical="top"
+          <Controller
+            control={control}
+            name="frontCard"
+            rules={{
+              required: appStrings.validators.required,
+              minLength: {
+                value: 3,
+                message: appStrings.validators.requiredThreeLetter,
+              },
+              maxLength: {
+                value: 300,
+                message: appStrings.validators.requiredThreeHundredLetter,
+              },
+            }}
+            render={({ field, fieldState }) => (
+              <BoxInputText
+                label={<H3 mb>{strings.front}</H3>}
+                onChangeText={field.onChange}
+                value={field.value}
+                placeholder={strings.placeholderFront}
+                errorMessage={fieldState?.error?.message}
+              />
+            )}
           />
 
-          <VSeparator />
-
-          <H3 mb>{strings.response}</H3>
-          <BoxInputTextStyle
-            placeholderTextColor={theme.color.grayMedium}
-            onChangeText={text => onChangeTextState('backCard', text)}
-            value={textState.backCard}
-            placeholder={strings.placeholderResponse}
-            multiline={true}
-            textAlignVertical="top"
+          <Controller
+            control={control}
+            name="backCard"
+            rules={{
+              required: appStrings.validators.required,
+              minLength: {
+                value: 3,
+                message: appStrings.validators.requiredThreeLetter,
+              },
+              maxLength: {
+                value: 300,
+                message: appStrings.validators.requiredThreeHundredLetter,
+              },
+            }}
+            render={({ field, fieldState }) => (
+              <BoxInputText
+                label={<H3 mb>{strings.response}</H3>}
+                onChangeText={field.onChange}
+                value={field.value}
+                placeholder={strings.placeholderResponse}
+                errorMessage={fieldState?.error?.message}
+              />
+            )}
           />
 
           <VSeparator spacing="double" />
-          <Button.CallToAction text={appStrings.button.send} loading={loading} onTap={() => onPressSubmit()} />
+          <Button.CallToAction
+            text={appStrings.button.send}
+            disabled={!formState.isValid}
+            onTap={handleSubmit(onSubmit)}
+          />
         </>
       </ScrollView>
     </>
