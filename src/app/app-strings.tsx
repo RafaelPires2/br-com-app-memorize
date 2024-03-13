@@ -9,6 +9,14 @@ export const appStrings = {
     emptyStateDeck: 'Ainda não existe nenhum Deck cadastrado. Cadastre seu primeiro Deck!',
   },
 
+  validators: {
+    requiredThreeLetter: 'Campo deve ter no mínimo 3 caracteres',
+    requiredThirtyLetter: 'Campo deve ter no mínimo 30 caracteres',
+    requiredThreeHundredLetter: 'Campo deve ter no mínimo 300 caracteres',
+    required: 'Este campo é obrigatório',
+    thisDeckAlreadyExists: 'Esse nome de deck já existe!',
+  },
+
   homePage: {
     separatorFlatlist: 'Todos os itens foram carregados',
 
