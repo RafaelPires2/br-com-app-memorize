@@ -13,7 +13,7 @@ interface ButtonBaseProps {
 export const ButtonBase = ({ text, disabled, variant, loading, onTap }: ButtonBaseProps) => {
   return (
     <ButtonTouchableStyles variant={variant} disabled={disabled} onPress={() => onTap()}>
-      <ButtonText disabled={disabled || loading} variant={variant}>
+      <ButtonText disabled={disabled} variant={variant}>
         {loading ? appStrings.button.loading : text}
       </ButtonText>
     </ButtonTouchableStyles>
