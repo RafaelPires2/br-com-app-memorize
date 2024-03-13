@@ -1,6 +1,6 @@
 # App memorize
 
-<h1> <img width="300px" src="./public/img-memorize-app.png" /> </h1>
+<h1> <img width="500px" src="./public/img-memorize-app.png" /> </h1>
 
 <br>
 
