@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Divider } from '@atomic/atm.divider';
@@ -11,6 +10,7 @@ import { Button } from '@app/components/atm.button';
 import { useForm, Controller } from 'react-hook-form';
 import { useDecksQuery } from '@app/data/queries/home';
 import { CheckBoxWrapper } from './add-new-card-styles';
+import { useAxiosPost } from '@app/core/axios/axios-post.hook';
 import { CheckBoxCircleStyle } from '@app/components/atm.check-box';
 import { SelectDropdownButton } from '@app/components/atm.select-button';
 import { BoxInputText, InputText } from '@app/components/atm.input-text';
@@ -41,7 +41,6 @@ export const AddNewCard = () => {
   });
 
   const fieldDeck = watch('deck');
-  console.log(fieldDeck);
 
   const isNewDeckCadaster = decks?.every(deck => {
     const deckTitle = deck.title.toLocaleLowerCase();
@@ -50,26 +49,38 @@ export const AddNewCard = () => {
     return deckTitle !== inputTextDeck;
   });
 
-  const newDeckPost = (data: AddNewCardProps) =>
-    axios.post('http://localhost:3000/decks', {
-      title: data?.deck ? data?.deck : data?.deckSelect,
-    });
+  interface CreateDeckResult {
+    id: string;
+    title: string | number;
+  }
 
-  const newCardPost = (data: AddNewCardProps) =>
-    axios
-      .post('http://localhost:3000/cards', {
-        front: data?.frontCard,
-        back: data?.backCard,
-      })
-      .then(res => console.log('Sucesso'))
-      .catch(err => console.log('Erro', err));
+  interface CreateDeckVariables {
+    title: string | number;
+  }
+
+  interface CreateCardResult {
+    id: string;
+    front: string | number;
+    back: string | number;
+  }
+
+  interface CreateCardVariables {
+    front: string | number;
+    back: string | number;
+  }
+
+  const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<CreateDeckResult, CreateDeckVariables>('decks', {
+    onCompleted: () => reset(),
+  });
+
+  const [createCard, { loading: loadingCardPost }] = useAxiosPost<CreateCardResult, CreateCardVariables>('cards', {
+    onCompleted: () => reset(),
+  });
 
   const onSubmit = (data: AddNewCardProps) => {
     if (isNewDeckCadaster || data.deckSelect) {
-      newDeckPost(data);
-      newCardPost(data);
-
-      reset();
+      createDeck({ title: data?.deck ? data?.deck : data?.deckSelect });
+      createCard({ front: data?.frontCard, back: data?.backCard });
     } else {
       setDeckIsEqual(true);
     }
@@ -131,6 +142,10 @@ export const AddNewCard = () => {
               name="deck"
               rules={{
                 required: appStrings.validators.required,
+                pattern: {
+                  value: /\S{3,}/,
+                  message: appStrings.validators.requiredThreeLetter,
+                },
                 minLength: {
                   value: 3,
                   message: appStrings.validators.requiredThreeLetter,
@@ -176,6 +191,10 @@ export const AddNewCard = () => {
             name="frontCard"
             rules={{
               required: appStrings.validators.required,
+              pattern: {
+                value: /\S{3,}/,
+                message: appStrings.validators.requiredThreeLetter,
+              },
               minLength: {
                 value: 3,
                 message: appStrings.validators.requiredThreeLetter,
@@ -201,6 +220,10 @@ export const AddNewCard = () => {
             name="backCard"
             rules={{
               required: appStrings.validators.required,
+              pattern: {
+                value: /\S{3,}/,
+                message: appStrings.validators.requiredThreeLetter,
+              },
               minLength: {
                 value: 3,
                 message: appStrings.validators.requiredThreeLetter,
@@ -226,6 +249,7 @@ export const AddNewCard = () => {
             text={appStrings.button.send}
             disabled={!formState.isValid}
             onTap={handleSubmit(onSubmit)}
+            loading={loadingDeckPost || loadingCardPost}
           />
         </>
       </ScrollView>
