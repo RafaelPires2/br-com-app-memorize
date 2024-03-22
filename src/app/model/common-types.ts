@@ -13,5 +13,5 @@ export interface CardI {
   id: string;
   front: string;
   back: string;
-  idDeck: string;
+  deckTitle: string;
 }
