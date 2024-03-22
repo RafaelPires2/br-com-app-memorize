@@ -10,7 +10,8 @@ import { useNavigation } from '@react-navigation/native';
 import { SeparatorFlatlist } from '@app/components/atm.separator-flatlist';
 import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
 import { LoadingState } from '@app/components/atm.loading-state/loading-state-component';
-import { DeckType, useCardsQuery, useDecksQuery, useUserQuery } from '@app/data/queries/home';
+import { useCardsQuery, useDecksQuery, useUserQuery } from '@app/data/queries/home';
+import { DeckI } from '@app/model';
 
 const idUser = '1';
 const theme = commonTheme;
@@ -18,11 +19,15 @@ const theme = commonTheme;
 export const HomePage = () => {
   const navigation = useNavigation<RootNavigationProp>();
 
-  const { user } = useUserQuery({ idUser });
-  const { amountDecks, decks, refetch, error, loading } = useDecksQuery();
-  const { amountCardsGeneral, cards } = useCardsQuery();
+  const { user, refetch: userRefetch } = useUserQuery({ idUser });
+  const { amountDecks, decks, refetch: deckRefetch, error, loading } = useDecksQuery();
+  const { amountCardsGeneral, cards, refetch: cardRefetch } = useCardsQuery();
 
-  const renderDecksItem = ({ item }: { item: DeckType }) => (
+  const refetchData = () => {
+    userRefetch(), deckRefetch(), cardRefetch();
+  };
+
+  const renderDecksItem = ({ item }: { item: DeckI }) => (
     <VBox>
       <DeckCard
         title={item.title}
@@ -37,7 +42,7 @@ export const HomePage = () => {
     <>
       <HomeHeader name={user?.name} amountDecks={amountDecks} amountCards={amountCardsGeneral} progress={0.3} />
 
-      {/* TODO: Refactor dos dados quando da erro, não carrega quando aciono o refetch */}
+      {/* TODO: */}
 
       <FlatList
         data={decks}
@@ -50,7 +55,7 @@ export const HomePage = () => {
             emptyStateMessage={appStrings.emptyState.emptyStateDeck}
             error={error}
             loading={loading}
-            refetch={() => refetch()}
+            refetch={() => refetchData()}
           />
         }
         contentContainerStyle={{ flex: decks?.length > 0 ? 0 : 1 }}

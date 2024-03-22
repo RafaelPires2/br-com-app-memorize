@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CardI, DeckI } from '@app/model';
 import { ScrollView, View } from 'react-native';
 import { Divider } from '@atomic/atm.divider';
 import { appStrings } from '@app/app-strings';
@@ -16,10 +17,10 @@ import { SelectDropdownButton } from '@app/components/atm.select-button';
 import { BoxInputText, InputText } from '@app/components/atm.input-text';
 
 interface AddNewCardProps {
-  deck: string | number;
-  frontCard: string | number;
-  backCard: string | number;
-  deckSelect: string | number;
+  deck: string;
+  frontCard: string;
+  backCard: string;
+  deckSelect: string;
 }
 
 const theme = commonTheme;
@@ -49,27 +50,16 @@ export const AddNewCard = () => {
     return deckTitle !== inputTextDeck;
   });
 
-  interface CreateDeckResult {
-    id: string;
-    title: string | number;
-  }
+  interface CreateDeckVariables extends Pick<DeckI, 'title'> {}
 
-  interface CreateDeckVariables {
-    title: string | number;
-  }
-
-  interface CreateCardResult {
-    id: string;
-    front: string | number;
-    back: string | number;
-  }
+  interface CreateCardResult extends Omit<CardI, 'idDeck'> {}
 
   interface CreateCardVariables {
-    front: string | number;
-    back: string | number;
+    front: string;
+    back: string;
   }
 
-  const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<CreateDeckResult, CreateDeckVariables>('decks', {
+  const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<DeckI, CreateDeckVariables>('decks', {
     onCompleted: () => reset(),
   });
 
@@ -78,9 +68,9 @@ export const AddNewCard = () => {
   });
 
   const onSubmit = (data: AddNewCardProps) => {
+    createDeck({ title: data?.deck ? data?.deck.trim() : data?.deckSelect });
     if (isNewDeckCadaster || data.deckSelect) {
-      createDeck({ title: data?.deck ? data?.deck : data?.deckSelect });
-      createCard({ front: data?.frontCard, back: data?.backCard });
+      createCard({ front: data?.frontCard.trim(), back: data?.backCard.trim() });
     } else {
       setDeckIsEqual(true);
     }
