@@ -13,12 +13,11 @@ const strings = appStrings.homePage;
 interface DeckCardProps {
   onTap: () => void;
   title: string;
-  deckId: string;
   dataCards: CardI[];
 }
 
-export const DeckCard = ({ onTap, title, deckId, dataCards }: DeckCardProps) => {
-  const numberOfCardsFromDeck = dataCards?.filter(card => card.idDeck === deckId).length;
+export const DeckCard = ({ onTap, title, dataCards }: DeckCardProps) => {
+  const numberOfCardsFromDeck = dataCards?.filter(card => card?.deckTitle === title).length;
 
   return (
     <>

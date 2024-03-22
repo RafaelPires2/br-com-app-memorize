@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { CardI, DeckI } from '@app/model';
-import { ScrollView, View } from 'react-native';
 import { Divider } from '@atomic/atm.divider';
 import { appStrings } from '@app/app-strings';
 import { Checkbox } from 'react-native-paper';
+import { ScrollView, View } from 'react-native';
 import { commonTheme } from '@atomic/obj.theme';
 import { H1, H3 } from '@atomic/atm.typography';
 import { HBox, VSeparator } from '@atomic/obj.grid';
 import { Button } from '@app/components/atm.button';
 import { useForm, Controller } from 'react-hook-form';
-import { useDecksQuery } from '@app/data/queries/home';
 import { CheckBoxWrapper } from './add-new-card-styles';
+import { useCardsQuery, useGetDecksContext } from '@app/data/queries/home';
 import { useAxiosPost } from '@app/core/axios/axios-post.hook';
 import { CheckBoxCircleStyle } from '@app/components/atm.check-box';
 import { SelectDropdownButton } from '@app/components/atm.select-button';
@@ -27,9 +27,9 @@ const theme = commonTheme;
 const strings = appStrings.newCardPage;
 
 export const AddNewCard = () => {
-  const { decks } = useDecksQuery();
+  const { decks, refetch } = useGetDecksContext();
+  const { refetch: refetchCard } = useCardsQuery();
   const [checkedNewCard, setCheckedNewCard] = useState(true);
-  const [deckIsEqual, setDeckIsEqual] = useState(false);
 
   const { control, handleSubmit, formState, reset, watch } = useForm<AddNewCardProps>({
     defaultValues: {
@@ -57,22 +57,32 @@ export const AddNewCard = () => {
   interface CreateCardVariables {
     front: string;
     back: string;
+    deckTitle: string;
   }
 
   const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<DeckI, CreateDeckVariables>('decks', {
-    onCompleted: () => reset(),
+    onCompleted: () => {
+      reset(), refetch(), refetchCard();
+    },
   });
 
   const [createCard, { loading: loadingCardPost }] = useAxiosPost<CreateCardResult, CreateCardVariables>('cards', {
-    onCompleted: () => reset(),
+    onCompleted: () => {
+      reset(), refetch(), refetchCard();
+    },
   });
 
   const onSubmit = (data: AddNewCardProps) => {
-    createDeck({ title: data?.deck ? data?.deck.trim() : data?.deckSelect });
-    if (isNewDeckCadaster || data.deckSelect) {
-      createCard({ front: data?.frontCard.trim(), back: data?.backCard.trim() });
-    } else {
-      setDeckIsEqual(true);
+    if (isNewDeckCadaster === true && data?.deck) {
+      createDeck({ title: data.deck.trim() });
+    }
+
+    if (isNewDeckCadaster === true || data.deckSelect) {
+      createCard({
+        front: data?.frontCard.trim(),
+        back: data?.backCard.trim(),
+        deckTitle: data.deck ? data.deck.trim() : data.deckSelect.trim(),
+      });
     }
   };
 
@@ -151,7 +161,9 @@ export const AddNewCard = () => {
                   placeholder={strings.placeholderDeck}
                   value={field.value}
                   onChangeText={field.onChange}
-                  errorMessage={deckIsEqual ? appStrings.validators.thisDeckAlreadyExists : fieldState?.error?.message}
+                  errorMessage={
+                    !isNewDeckCadaster ? appStrings.validators.thisDeckAlreadyExists : fieldState?.error?.message
+                  }
                 />
               )}
             />
@@ -237,7 +249,7 @@ export const AddNewCard = () => {
           <VSeparator spacing="double" />
           <Button.CallToAction
             text={appStrings.button.send}
-            disabled={!formState.isValid}
+            disabled={!formState.isValid || !isNewDeckCadaster}
             onTap={handleSubmit(onSubmit)}
             loading={loadingDeckPost || loadingCardPost}
           />

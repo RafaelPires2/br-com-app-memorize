@@ -1,17 +1,43 @@
-import { useEffect, useState } from 'react';
-import { useGetQuery } from '@app/core/axios';
 import { DeckI } from '@app/model';
+import { useGetQuery } from '@app/core/axios';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
-export const useDecksQuery = () => {
+interface useGetDecksContextI {
+  decks: DeckI[];
+  amountDecks: number;
+  error: Error;
+  loading: boolean;
+  refetch: () => void;
+}
+interface useDecksQueryProps {
+  children: ReactNode;
+}
+
+const GetDecksContext = createContext<useGetDecksContextI | undefined>(undefined);
+
+export function GetDecksProvider({ children }: useDecksQueryProps) {
+  const { data, error, loading, refetch } = useGetQuery<DeckI[]>('decks');
+
   const [decks, setDecks] = useState<DeckI[]>([]);
   const [amountDecks, setAmountDecks] = useState(0);
-
-  const { data, error, loading, refetch } = useGetQuery<DeckI[]>('http://localhost:3000/decks');
 
   useEffect(() => {
     setDecks(data);
     setAmountDecks(data?.length);
   }, [data]);
 
-  return { decks, amountDecks, error, loading, refetch };
+  return (
+    <GetDecksContext.Provider value={{ decks, amountDecks, error, loading, refetch }}>
+      {children}
+    </GetDecksContext.Provider>
+  );
+}
+
+export const useGetDecksContext = (): useGetDecksContextI => {
+  const context = useContext(GetDecksContext);
+
+  if (!context) {
+    throw new Error('useGetDecksContext deve ser usado dentro de um GetDecksProvider');
+  }
+  return context;
 };
