@@ -38,7 +38,7 @@ export const HomePage = () => {
     <>
       <HomeHeader name={user?.name} amountDecks={amountDecks} amountCards={amountCardsGeneral} progress={0.3} />
 
-      {/* TODO: */}
+      {/* TODO: Sincronizar quantidade de cards após fazer um post*/}
 
       <FlatList
         data={decks}
