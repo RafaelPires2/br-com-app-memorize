@@ -12,13 +12,13 @@ export function useGetQuery<TData = any>(url: string): QueryResult<TData> {
   const [data, setData] = useState<TData | null>();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
-  const [trigger, setTrigger] = useState(false);
+  const [trigger, setTrigger] = useState<number>(0);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
 
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(`http://localhost:3000/${url}`);
       setError(null);
       setData(response.data);
     } catch (error) {
@@ -27,14 +27,14 @@ export function useGetQuery<TData = any>(url: string): QueryResult<TData> {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [url, trigger]);
 
   useEffect(() => {
     fetchData();
-  }, [url, trigger]);
+  }, [fetchData]);
 
   const refetch = () => {
-    setTrigger(!trigger);
+    setTrigger(prev => prev + 1);
   };
 
   return { data, error, loading, refetch };

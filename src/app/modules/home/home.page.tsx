@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SeparatorFlatlist } from '@app/components/atm.separator-flatlist';
 import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
 import { LoadingState } from '@app/components/atm.loading-state/loading-state-component';
-import { useCardsQuery, useDecksQuery, useUserQuery } from '@app/data/queries/home';
+import { useCardsQuery, useGetDecksContext, useUserQuery } from '@app/data/queries/home';
 import { DeckI } from '@app/model';
 
 const idUser = '1';
@@ -20,7 +20,8 @@ export const HomePage = () => {
   const navigation = useNavigation<RootNavigationProp>();
 
   const { user, refetch: userRefetch } = useUserQuery({ idUser });
-  const { amountDecks, decks, refetch: deckRefetch, error, loading } = useDecksQuery();
+
+  const { decks, amountDecks, error, loading, refetch: deckRefetch } = useGetDecksContext();
   const { amountCardsGeneral, cards, refetch: cardRefetch } = useCardsQuery();
 
   const refetchData = () => {
@@ -29,12 +30,7 @@ export const HomePage = () => {
 
   const renderDecksItem = ({ item }: { item: DeckI }) => (
     <VBox>
-      <DeckCard
-        title={item.title}
-        deckId={item.id}
-        dataCards={cards}
-        onTap={() => navigation.navigate('detailCardsPage')}
-      />
+      <DeckCard title={item.title} dataCards={cards} onTap={() => navigation.navigate('detailCardsPage')} />
     </VBox>
   );
 

@@ -6,7 +6,7 @@ export const useCardsQuery = () => {
   const [cards, setCards] = useState<CardI[]>([]);
   const [amountCardsGeneral, setAmountCards] = useState(0);
 
-  const { data, refetch } = useGetQuery<CardI[]>('http://localhost:3000/cards');
+  const { data, refetch } = useGetQuery<CardI[]>('cards');
 
   useEffect(() => {
     const numberOfCardsGeneral = data?.length || 0;

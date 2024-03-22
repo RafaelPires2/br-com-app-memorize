@@ -8,7 +8,7 @@ interface UserProps {
 export const useUserQuery = ({ idUser }: UserProps) => {
   const [user, setUser] = useState<UserI>();
 
-  const { data, refetch } = useGetQuery<UserI[]>(`http://localhost:3000/users?id=${idUser}`);
+  const { data, refetch } = useGetQuery<UserI[]>(`users?id=${idUser}`);
 
   useEffect(() => {
     const currentUser = data?.find(u => u.id === idUser);
