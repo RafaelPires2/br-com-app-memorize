@@ -24,6 +24,8 @@ export const HomePage = () => {
   const { decks, amountDecks, error, loading, refetch: deckRefetch } = useGetDecksContext();
   const { amountCardsGeneral, cards, refetch: cardRefetch } = useGetCardsContext();
 
+  const deckOrganizedAsc = decks?.slice().sort((a, b) => a.title.localeCompare(b.title));
+
   const refetchData = () => {
     userRefetch(), deckRefetch(), cardRefetch();
   };
@@ -39,7 +41,7 @@ export const HomePage = () => {
       <HomeHeader name={user?.name} amountDecks={amountDecks} amountCards={amountCardsGeneral} progress={0.3} />
 
       <FlatList
-        data={decks}
+        data={deckOrganizedAsc}
         renderItem={renderDecksItem}
         keyExtractor={item => item.id}
         ListFooterComponent={decks?.length > 0 && SeparatorFlatlist}
