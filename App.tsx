@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { AppRoutes } from './src/app/core/navigation/routes';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { GetDecksProvider } from '@app/data/queries/home/decks-use-case';
+import { GetCardsProvider } from '@app/data/queries/home';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,9 +31,11 @@ export default function App() {
       <SafeAreaProvider>
         <SafeAreaView style={{ backgroundColor: theme.color.primaryDark }} />
         <StatusBar style="light" translucent />
-        <GetDecksProvider>
-          <AppRoutes />
-        </GetDecksProvider>
+        <GetCardsProvider>
+          <GetDecksProvider>
+            <AppRoutes />
+          </GetDecksProvider>
+        </GetCardsProvider>
       </SafeAreaProvider>
     </ThemeProvider>
   );
