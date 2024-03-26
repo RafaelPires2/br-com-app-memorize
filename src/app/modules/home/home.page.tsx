@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeckI } from '@app/model';
 import { FlatList } from 'react-native';
 import { appStrings } from '@app/app-strings';
 import { commonTheme } from '@atomic/obj.theme';
@@ -10,8 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SeparatorFlatlist } from '@app/components/atm.separator-flatlist';
 import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
 import { LoadingState } from '@app/components/atm.loading-state/loading-state-component';
-import { useCardsQuery, useGetDecksContext, useUserQuery } from '@app/data/queries/home';
-import { DeckI } from '@app/model';
+import { useGetCardsContext, useGetDecksContext, useUserQuery } from '@app/data/queries/home';
 
 const idUser = '1';
 const theme = commonTheme;
@@ -22,7 +22,7 @@ export const HomePage = () => {
   const { user, refetch: userRefetch } = useUserQuery({ idUser });
 
   const { decks, amountDecks, error, loading, refetch: deckRefetch } = useGetDecksContext();
-  const { amountCardsGeneral, cards, refetch: cardRefetch } = useCardsQuery();
+  const { amountCardsGeneral, cards, refetch: cardRefetch } = useGetCardsContext();
 
   const refetchData = () => {
     userRefetch(), deckRefetch(), cardRefetch();
@@ -37,8 +37,6 @@ export const HomePage = () => {
   return (
     <>
       <HomeHeader name={user?.name} amountDecks={amountDecks} amountCards={amountCardsGeneral} progress={0.3} />
-
-      {/* TODO: Sincronizar quantidade de cards após fazer um post*/}
 
       <FlatList
         data={decks}

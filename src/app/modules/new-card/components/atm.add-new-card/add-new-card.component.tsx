@@ -10,11 +10,11 @@ import { HBox, VSeparator } from '@atomic/obj.grid';
 import { Button } from '@app/components/atm.button';
 import { useForm, Controller } from 'react-hook-form';
 import { CheckBoxWrapper } from './add-new-card-styles';
-import { useCardsQuery, useGetDecksContext } from '@app/data/queries/home';
 import { useAxiosPost } from '@app/core/axios/axios-post.hook';
 import { CheckBoxCircleStyle } from '@app/components/atm.check-box';
 import { SelectDropdownButton } from '@app/components/atm.select-button';
 import { BoxInputText, InputText } from '@app/components/atm.input-text';
+import { useGetCardsContext, useGetDecksContext } from '@app/data/queries/home';
 
 interface AddNewCardProps {
   deck: string;
@@ -27,8 +27,8 @@ const theme = commonTheme;
 const strings = appStrings.newCardPage;
 
 export const AddNewCard = () => {
-  const { decks, refetch } = useGetDecksContext();
-  const { refetch: refetchCard } = useCardsQuery();
+  const { decks, refetch: refetchDeck } = useGetDecksContext();
+  const { refetch: refetchCard } = useGetCardsContext();
   const [checkedNewCard, setCheckedNewCard] = useState(true);
 
   const { control, handleSubmit, formState, reset, watch } = useForm<AddNewCardProps>({
@@ -62,13 +62,13 @@ export const AddNewCard = () => {
 
   const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<DeckI, CreateDeckVariables>('decks', {
     onCompleted: () => {
-      reset(), refetch(), refetchCard();
+      reset(), refetchDeck(), refetchCard();
     },
   });
 
   const [createCard, { loading: loadingCardPost }] = useAxiosPost<CreateCardResult, CreateCardVariables>('cards', {
     onCompleted: () => {
-      reset(), refetch(), refetchCard();
+      reset(), refetchDeck(), refetchCard();
     },
   });
 
