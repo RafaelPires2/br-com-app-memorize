@@ -2,72 +2,57 @@
   "decks": [
     {
       "id": "1",
-      "title": "Verb to Be",
-      "cards": [
-        { "id": "1", "front": "1", "back": "one" },
-        { "id": "2", "front": "2", "back": "two" }
-      ]
+      "title": "Verb to Be"
     },
     {
       "id": "2",
-      "title": "Irregular Verbs",
-      "cards": [{}]
+      "title": "Irregular Verbs"
     },
     {
       "id": "3",
-      "title": "Verbs used more",
-      "cards": [{}]
+      "title": "Verbs used more"
     },
     {
       "id": "4",
-      "title": "React-Native",
-      "cards": [{}]
+      "title": "React-Native"
     },
     {
       "id": "5",
-      "title": "Array Method",
-      "cards": [{}]
+      "title": "Array Method"
     },
     {
       "id": "6",
-      "title": "Spain",
-      "cards": [{}]
+      "title": "Spain"
     },
     {
       "id": "7",
-      "title": "Chinese",
-      "cards": [{}]
+      "title": "Chinese"
     },
     {
       "id": "8",
-      "title": "Russo",
-      "cards": [{}]
+      "title": "Russo"
     },
     {
       "id": "9",
-      "title": "Português Portugal",
-      "cards": [{}]
+      "title": "Português Portugal"
     },
     {
       "id": "10",
-      "title": "JavaScript",
-      "cards": [{}]
+      "title": "JavaScript"
     },
     {
       "id": "11",
-      "title": "TypeScript",
-      "cards": [{}]
+      "title": "TypeScript"
     },
     {
       "id": "12",
-      "title": "HTTP",
-      "cards": [{}]
+      "title": "HTTP"
     }
   ],
   "cards": [
-    { "id": "1", "front": "Am", "back": "Ser, estar", "deckTitle": "Verb to Be" },
-    { "id": "2", "front": "Is", "back": "É", "deckTitle": "Verb to Be" },
-    { "id": "3", "front": "Was", "back": "Foi, era", "deckTitle": "Verb to Be" },
+    { "id": "1", "front": "I Am", "back": "Eu sou, Eu estou", "deckTitle": "Verb to Be" },
+    { "id": "2", "front": "You are", "back": "Você é, Você está", "deckTitle": "Verb to Be" },
+    { "id": "3", "front": "He is", "back": "Ele é, Ele está", "deckTitle": "Verb to Be" },
     { "id": "4", "front": "One", "back": "1", "deckTitle": "Irregular Verbs" },
     { "id": "5", "front": "Two", "back": "2", "deckTitle": "Irregular Verbs" },
     { "id": "6", "front": "Three", "back": "3", "deckTitle": "Irregular Verbs" }
