@@ -8,3 +8,5 @@ export const CloseButtonStyles = styled.TouchableOpacity`
     height: ${theme.button.height}px;
   `}
 `;
+
+export const ReturnButtonStyles = styled(CloseButtonStyles)``;

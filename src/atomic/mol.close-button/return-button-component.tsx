@@ -4,18 +4,18 @@ import { commonTheme } from '@atomic/obj.theme';
 
 interface CloseButtonProps {
   onTap: () => void;
-  whiteXButton?: boolean;
+  whiteIconButton?: boolean;
 }
 
 const theme = commonTheme;
 
-export const CloseButton = ({ onTap, whiteXButton }: CloseButtonProps) => {
+export const ReturnButton = ({ onTap, whiteIconButton }: CloseButtonProps) => {
   return (
     <CloseButtonStyles onPress={onTap}>
       <Feather
-        name="x"
+        name="arrow-left"
         size={theme.iconSize.medium}
-        color={whiteXButton ? theme.color.white : theme.color.primaryDark}
+        color={whiteIconButton ? theme.color.white : theme.color.primaryDark}
       />
     </CloseButtonStyles>
   );

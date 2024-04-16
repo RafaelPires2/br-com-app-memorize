@@ -50,12 +50,48 @@
     }
   ],
   "cards": [
-    { "id": "1", "front": "Am", "back": "Ser, estar", "deckTitle": "Verb to Be" },
-    { "id": "2", "front": "Is", "back": "É", "deckTitle": "Verb to Be" },
-    { "id": "3", "front": "Is", "back": "É", "deckTitle": "Verb to Be" },
-    { "id": "4", "front": "Is", "back": "É", "deckTitle": "Irregular Verbs" },
-    { "id": "5", "front": "Is", "back": "É", "deckTitle": "Irregular Verbs" },
-    { "id": "6", "front": "Is", "back": "É", "deckTitle": "Irregular Verbs" }
+    {
+      "id": "1",
+      "front": "I Am",
+      "back": "Eu sou, Eu estou",
+      "deckTitle": "Verb to Be",
+      "visualized": false
+    },
+    {
+      "id": "2",
+      "front": "You are",
+      "back": "Você é, Você está",
+      "deckTitle": "Verb to Be",
+      "visualized": false
+    },
+    {
+      "id": "3",
+      "front": "He is",
+      "back": "Ele é, Ele está",
+      "deckTitle": "Verb to Be",
+      "visualized": false
+    },
+    {
+      "id": "4",
+      "front": "One",
+      "back": "1",
+      "deckTitle": "Irregular Verbs",
+      "visualized": false
+    },
+    {
+      "id": "5",
+      "front": "Two",
+      "back": "2",
+      "deckTitle": "Irregular Verbs",
+      "visualized": false
+    },
+    {
+      "id": "6",
+      "front": "Three",
+      "back": "3",
+      "deckTitle": "Irregular Verbs",
+      "visualized": false
+    }
   ],
   "users": [
     {

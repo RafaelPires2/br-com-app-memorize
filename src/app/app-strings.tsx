@@ -3,6 +3,8 @@ export const appStrings = {
     send: 'Enviar',
     loading: 'Carregando...',
     loadingAgain: 'Carregar novamente',
+    seeFrontCard: 'Ver frente',
+    seeBackCard: 'Ver verso',
   },
 
   emptyState: {
@@ -47,5 +49,14 @@ export const appStrings = {
     placeholderDeck: 'Digite o nome do Deck...',
     placeholderFront: 'Digite a frente do card...',
     placeholderResponse: 'Digite a resposta do card...',
+  },
+
+  detailPage: {
+    front: 'Frente',
+    back: 'Verso',
+    again: 'Novamente',
+    hard: 'Difícil',
+    easy: 'Fácil',
+    regular: 'Bom',
   },
 };

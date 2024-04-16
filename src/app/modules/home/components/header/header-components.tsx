@@ -1,6 +1,6 @@
 import React from 'react';
 import { appStrings } from '@app/app-strings';
-import { HeaderStyles } from './header-styles';
+import { HeaderStyles } from '../../../../components/atm.header/header-styles';
 import { commonTheme } from '@atomic/obj.theme';
 import { Body, H3 } from '@atomic/atm.typography';
 import * as Progress from 'react-native-progress';

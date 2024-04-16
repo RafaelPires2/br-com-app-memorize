@@ -14,4 +14,5 @@ export interface CardI {
   front: string;
   back: string;
   deckTitle: string;
+  visualized: boolean;
 }

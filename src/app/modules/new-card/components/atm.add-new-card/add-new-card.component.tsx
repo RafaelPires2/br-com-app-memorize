@@ -52,12 +52,9 @@ export const AddNewCard = () => {
 
   interface CreateDeckVariables extends Pick<DeckI, 'title'> {}
 
-  interface CreateCardResult extends Omit<CardI, 'idDeck'> {}
-
   interface CreateCardVariables {
     front: string;
     back: string;
-    deckTitle: string;
   }
 
   const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<DeckI, CreateDeckVariables>('decks', {
@@ -66,7 +63,7 @@ export const AddNewCard = () => {
     },
   });
 
-  const [createCard, { loading: loadingCardPost }] = useAxiosPost<CreateCardResult, CreateCardVariables>('cards', {
+  const [createCard, { loading: loadingCardPost }] = useAxiosPost<CardI, CreateCardVariables>('cards', {
     onCompleted: () => {
       reset(), refetchDeck(), refetchCard();
     },
@@ -77,11 +74,10 @@ export const AddNewCard = () => {
       createDeck({ title: data.deck.trim() });
     }
 
-    if (isNewDeckCadaster === true || data.deckSelect) {
+    if (isNewDeckCadaster === true || data?.deckSelect) {
       createCard({
         front: data?.frontCard.trim(),
         back: data?.backCard.trim(),
-        deckTitle: data.deck ? data.deck.trim() : data.deckSelect.trim(),
       });
     }
   };

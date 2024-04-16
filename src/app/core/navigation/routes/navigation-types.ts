@@ -1,10 +1,10 @@
 import { NavigationProp } from '@react-navigation/native';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   homeRoutes: undefined;
   accountRoutes: undefined;
   newCard: undefined;
-  detailCardsPage: undefined;
+  detailCardsPage: { title: string };
 };
 
 export type RootNavigationProp = NavigationProp<RootStackParamList>;
