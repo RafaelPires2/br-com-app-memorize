@@ -1,17 +1,17 @@
-import React from 'react';
-import { DeckI } from '@app/model';
-import { FlatList } from 'react-native';
-import { appStrings } from '@app/app-strings';
-import { commonTheme } from '@atomic/obj.theme';
-import { Feather } from 'react-native-vector-icons';
-import { VBox } from '@atomic/obj.grid/grid.component';
-import { HomeHeader } from '@app/components/atm.header';
-import { DeckCard } from '@app/components/atm.deck-card';
-import { useNavigation } from '@react-navigation/native';
-import { SeparatorFlatlist } from '@app/components/atm.separator-flatlist';
-import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
-import { LoadingState } from '@app/components/atm.loading-state/loading-state-component';
 import { useGetCardsContext, useGetDecksContext, useUserQuery } from '@app/data/queries/home';
+import { LoadingState } from '@app/components/atm.loading-state/loading-state-component';
+import { RootNavigationProp } from '@app/core/navigation/routes/navigation-types';
+import { SeparatorFlatlist } from '@app/components/atm.separator-flatlist';
+import { useNavigation } from '@react-navigation/native';
+import { DeckCard } from '@app/components/atm.deck-card';
+import { VBox } from '@atomic/obj.grid/grid.component';
+import { Feather } from 'react-native-vector-icons';
+import { HomeHeader } from './components/header';
+import { commonTheme } from '@atomic/obj.theme';
+import { appStrings } from '@app/app-strings';
+import { FlatList } from 'react-native';
+import { DeckI } from '@app/model';
+import React from 'react';
 
 const idUser = '1';
 const theme = commonTheme;
@@ -32,7 +32,11 @@ export const HomePage = () => {
 
   const renderDecksItem = ({ item }: { item: DeckI }) => (
     <VBox>
-      <DeckCard title={item.title} dataCards={cards} onTap={() => navigation.navigate('detailCardsPage')} />
+      <DeckCard
+        title={item.title}
+        dataCards={cards}
+        onTap={() => navigation.navigate('detailCardsPage', { title: item?.title })}
+      />
     </VBox>
   );
 
@@ -44,7 +48,7 @@ export const HomePage = () => {
         data={deckOrganizedAsc}
         renderItem={renderDecksItem}
         keyExtractor={item => item.id}
-        ListFooterComponent={decks?.length > 0 && SeparatorFlatlist}
+        ListFooterComponent={deckOrganizedAsc?.length > 0 && SeparatorFlatlist}
         ListEmptyComponent={
           <LoadingState
             imageIcon={<Feather name="bell" size={theme.iconSize.smallGif} color={theme.color.secondaryDark} />}
@@ -54,7 +58,7 @@ export const HomePage = () => {
             refetch={() => refetchData()}
           />
         }
-        contentContainerStyle={{ flex: decks?.length > 0 ? 0 : 1 }}
+        contentContainerStyle={{ flex: deckOrganizedAsc?.length > 0 ? 0 : 1 }}
       />
     </>
   );

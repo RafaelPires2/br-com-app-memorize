@@ -1,6 +1,6 @@
 import React from 'react';
 import { HomePage } from '@app/modules/home';
-import { DetailCardsPage } from '@app/modules/home/detail-cards.page';
+import { DetailCardsPage } from '@app/modules/detail-cards/detail-cards.page';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const HomeStack = createNativeStackNavigator();

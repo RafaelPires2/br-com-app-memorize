@@ -1,1 +1,1 @@
-export * from './header-components';
+export * from './header-styles';
