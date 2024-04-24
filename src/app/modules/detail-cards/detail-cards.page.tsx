@@ -8,7 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useGetCardsContext } from '@app/data/queries/home';
 import { HeaderStyles } from '@app/components/atm.header';
 import { Button } from '@app/components/atm.button';
-import { Body, H1 } from '@atomic/atm.typography';
+import { Body, H1, H2 } from '@atomic/atm.typography';
 import { appStrings } from '@app/app-strings';
 import { ScrollView } from 'react-native';
 import React, { useState } from 'react';
@@ -18,6 +18,7 @@ const strings = appStrings.detailPage;
 const MOVE_CARD_SECOND_POSITION = 1;
 const MOVE_CARD_FOURTH_POSITION = 3;
 const MOVE_CARD_SEVENTH_POSITION = 6;
+const PADDING_TITLE = 50;
 
 export const DetailCardsPage = () => {
   const navigation = useNavigation<RootNavigationProp>();
@@ -26,7 +27,6 @@ export const DetailCardsPage = () => {
   const { cards } = useGetCardsContext();
 
   // TODO: Corrigir passagem de parametros para não dar mais erro
-  // TODO: Adicionar status ao card (Visualizado) para preencher barra de progresso.
   // TODO: Adicionar estado de vazio na pagina de detalhes quando não houver card
   // TODO: Adicionar opção de deletar card
   // TODO: Adicionar opção de deletar deck
@@ -52,7 +52,14 @@ export const DetailCardsPage = () => {
   return (
     <>
       <HeaderStyles>
-        <ReturnButton whiteIconButton onTap={() => navigation.goBack()} />
+        <HBox>
+          <HBox.Item vAlign="center" wrap>
+            <ReturnButton whiteIconButton onTap={() => navigation.goBack()} />
+          </HBox.Item>
+          <HBox.Item vAlign="center" hAlign="center" style={{ paddingRight: PADDING_TITLE }}>
+            <H2 color="white">{title}</H2>
+          </HBox.Item>
+        </HBox>
       </HeaderStyles>
 
       <VSeparator />
@@ -86,7 +93,9 @@ export const DetailCardsPage = () => {
                 text={strings.again}
                 textColorWhite
                 color="alert"
-                onTap={() => moveCardOfPosition(MOVE_CARD_SECOND_POSITION)}
+                onTap={() => {
+                  moveCardOfPosition(MOVE_CARD_SECOND_POSITION), setToggleCard(true);
+                }}
               />
             </HBox.Item>
 
@@ -94,7 +103,9 @@ export const DetailCardsPage = () => {
               <DetailButton
                 text={strings.hard}
                 color="accessoryOrange"
-                onTap={() => moveCardOfPosition(MOVE_CARD_FOURTH_POSITION)}
+                onTap={() => {
+                  moveCardOfPosition(MOVE_CARD_FOURTH_POSITION), setToggleCard(true);
+                }}
               />
             </HBox.Item>
 
@@ -102,12 +113,20 @@ export const DetailCardsPage = () => {
               <DetailButton
                 text={strings.regular}
                 color="accessoryBlue"
-                onTap={() => moveCardOfPosition(MOVE_CARD_SEVENTH_POSITION)}
+                onTap={() => {
+                  moveCardOfPosition(MOVE_CARD_SEVENTH_POSITION), setToggleCard(true);
+                }}
               />
             </HBox.Item>
 
             <HBox.Item>
-              <DetailButton text={strings.easy} color="success" onTap={() => moveCardLastPosition()} />
+              <DetailButton
+                text={strings.easy}
+                color="success"
+                onTap={() => {
+                  moveCardLastPosition(), setToggleCard(true);
+                }}
+              />
             </HBox.Item>
           </HBox>
         </ButtonsDetailNextWrapper>

@@ -22,7 +22,7 @@ export const HomePage = () => {
   const { user, refetch: userRefetch } = useUserQuery({ idUser });
 
   const { decks, amountDecks, error, loading, refetch: deckRefetch } = useGetDecksContext();
-  const { amountCardsGeneral, cards, refetch: cardRefetch } = useGetCardsContext();
+  const { amountCardsGeneral, cards, refetch: cardRefetch, cardsVisualized } = useGetCardsContext();
 
   const deckOrganizedAsc = decks?.slice().sort((a, b) => a.title.localeCompare(b.title));
 
@@ -42,7 +42,12 @@ export const HomePage = () => {
 
   return (
     <>
-      <HomeHeader name={user?.name} amountDecks={amountDecks} amountCards={amountCardsGeneral} progress={0.3} />
+      <HomeHeader
+        name={user?.name}
+        amountDecks={amountDecks}
+        amountCards={amountCardsGeneral}
+        progress={cardsVisualized}
+      />
 
       <FlatList
         data={deckOrganizedAsc}

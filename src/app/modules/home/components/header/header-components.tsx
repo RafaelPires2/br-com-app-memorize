@@ -1,13 +1,13 @@
-import React from 'react';
-import { appStrings } from '@app/app-strings';
-import { HeaderStyles } from '../../../../components/atm.header/header-styles';
-import { commonTheme } from '@atomic/obj.theme';
+import { HBox, VBox, VSeparator } from '@atomic/obj.grid/grid.component';
+import { ImageIcon } from '@atomic/atm.icon-image/icon-image.component';
+import { formattedCurrentDate } from '@app/utils/date-components';
+import { HeaderStyles } from '@app/components/atm.header';
+import { Asset } from '@atomic/obj.asset/asset.component';
 import { Body, H3 } from '@atomic/atm.typography';
 import * as Progress from 'react-native-progress';
-import { Asset } from '@atomic/obj.asset/asset.component';
-import { formattedCurrentDate } from '@app/utils/date-components';
-import { ImageIcon } from '@atomic/atm.icon-image/icon-image.component';
-import { HBox, VBox, VSeparator } from '@atomic/obj.grid/grid.component';
+import { commonTheme } from '@atomic/obj.theme';
+import { appStrings } from '@app/app-strings';
+import React from 'react';
 
 const HEIGHT_PROGRESS_BAR = 10;
 
@@ -22,6 +22,8 @@ interface HomeHeaderProps {
 }
 
 export const HomeHeader = ({ name, amountDecks, amountCards, progress }: HomeHeaderProps) => {
+  const percentOfCardsVisualized = progress / amountCards;
+
   return (
     <>
       <HeaderStyles>
@@ -51,7 +53,7 @@ export const HomeHeader = ({ name, amountDecks, amountCards, progress }: HomeHea
               <H3 color="white">{strings.header.progress}</H3>
               <VSeparator spacing="half" />
               <Progress.Bar
-                progress={progress}
+                progress={percentOfCardsVisualized || 0}
                 height={HEIGHT_PROGRESS_BAR}
                 color={theme.color.secondary}
                 borderColor={theme.color.secondaryDark}

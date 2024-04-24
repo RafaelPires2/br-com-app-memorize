@@ -1,6 +1,7 @@
 import { CardI } from '@app/model';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useGetCardsContext } from '@app/data/queries/home';
 
 // 1- Criar um localStorage, metodos get, set, update, remove
 // 2- buscar os cards do banco e armazenar no storage
@@ -12,6 +13,7 @@ interface useMoveElementFromPositionProps {
 
 export function useMoveElementFromPosition({ array }: useMoveElementFromPositionProps) {
   const [cardsArray, setArray] = useState(array);
+  const { refetch: refetchCards } = useGetCardsContext();
 
   const findFirstCard = cardsArray.find(card => card);
 
@@ -40,6 +42,7 @@ export function useMoveElementFromPosition({ array }: useMoveElementFromPosition
     setArray(newArray);
     handleUpdateCards(newArray);
     handleSetStateVisualizedCard();
+    refetchCards();
   };
 
   const moveCardLastPosition = () => {
@@ -50,6 +53,7 @@ export function useMoveElementFromPosition({ array }: useMoveElementFromPosition
     setArray(newArray);
     handleUpdateCards(newArray);
     handleSetStateVisualizedCard();
+    refetchCards();
   };
 
   return {
