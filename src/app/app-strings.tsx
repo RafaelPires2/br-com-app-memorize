@@ -12,7 +12,7 @@ export const appStrings = {
   },
 
   validators: {
-    requiredThreeLetter: 'Campo deve ter no mínimo 3 caracteres',
+    requiredOneCharacter: 'Campo deve ter no mínimo 1 caracter',
     requiredThirtyLetter: 'Campo deve ter no mínimo 30 caracteres',
     requiredThreeHundredLetter: 'Campo deve ter no mínimo 300 caracteres',
     required: 'Este campo é obrigatório',
