@@ -55,6 +55,7 @@ export const AddNewCard = () => {
   interface CreateCardVariables {
     front: string;
     back: string;
+    deckTitle: string;
   }
 
   const [createDeck, { loading: loadingDeckPost }] = useAxiosPost<DeckI, CreateDeckVariables>('decks', {
@@ -78,6 +79,7 @@ export const AddNewCard = () => {
       createCard({
         front: data?.frontCard.trim(),
         back: data?.backCard.trim(),
+        deckTitle: data?.deck.trim() || data.deckSelect.trim(),
       });
     }
   };
@@ -139,12 +141,12 @@ export const AddNewCard = () => {
               rules={{
                 required: appStrings.validators.required,
                 pattern: {
-                  value: /\S{3,}/,
-                  message: appStrings.validators.requiredThreeLetter,
+                  value: /\S{1,}/,
+                  message: appStrings.validators.requiredOneCharacter,
                 },
                 minLength: {
-                  value: 3,
-                  message: appStrings.validators.requiredThreeLetter,
+                  value: 1,
+                  message: appStrings.validators.requiredOneCharacter,
                 },
                 maxLength: {
                   value: 30,
@@ -190,12 +192,12 @@ export const AddNewCard = () => {
             rules={{
               required: appStrings.validators.required,
               pattern: {
-                value: /\S{3,}/,
-                message: appStrings.validators.requiredThreeLetter,
+                value: /\S{1,}/,
+                message: appStrings.validators.requiredOneCharacter,
               },
               minLength: {
-                value: 3,
-                message: appStrings.validators.requiredThreeLetter,
+                value: 1,
+                message: appStrings.validators.requiredOneCharacter,
               },
               maxLength: {
                 value: 300,
@@ -219,12 +221,12 @@ export const AddNewCard = () => {
             rules={{
               required: appStrings.validators.required,
               pattern: {
-                value: /\S{3,}/,
-                message: appStrings.validators.requiredThreeLetter,
+                value: /\S{1,}/,
+                message: appStrings.validators.requiredOneCharacter,
               },
               minLength: {
-                value: 3,
-                message: appStrings.validators.requiredThreeLetter,
+                value: 1,
+                message: appStrings.validators.requiredOneCharacter,
               },
               maxLength: {
                 value: 300,
