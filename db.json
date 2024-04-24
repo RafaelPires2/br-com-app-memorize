@@ -1,96 +1,121 @@
 {
   "decks": [
     {
-      "id": "1",
-      "title": "Verb to Be"
+      "title": "Irregular Verbs",
+      "id": 1
     },
     {
-      "id": "2",
-      "title": "Irregular Verbs"
-    },
-    {
-      "id": "3",
-      "title": "Verbs used more"
-    },
-    {
-      "id": "4",
-      "title": "React-Native"
-    },
-    {
-      "id": "5",
-      "title": "Array Method"
-    },
-    {
-      "id": "6",
-      "title": "Spain"
-    },
-    {
-      "id": "7",
-      "title": "Chinese"
-    },
-    {
-      "id": "8",
-      "title": "Russo"
-    },
-    {
-      "id": "9",
-      "title": "Português Portugal"
-    },
-    {
-      "id": "10",
-      "title": "JavaScript"
-    },
-    {
-      "id": "11",
-      "title": "TypeScript"
-    },
-    {
-      "id": "12",
-      "title": "HTTP"
+      "title": "Métodos de array - JS",
+      "id": 2
     }
   ],
   "cards": [
     {
-      "id": "1",
-      "front": "I Am",
-      "back": "Eu sou, Eu estou",
-      "deckTitle": "Verb to Be",
-      "visualized": false
-    },
-    {
-      "id": "2",
-      "front": "You are",
-      "back": "Você é, Você está",
-      "deckTitle": "Verb to Be",
-      "visualized": false
-    },
-    {
-      "id": "3",
-      "front": "He is",
-      "back": "Ele é, Ele está",
-      "deckTitle": "Verb to Be",
-      "visualized": false
-    },
-    {
-      "id": "4",
-      "front": "One",
-      "back": "1",
+      "front": "Be",
+      "back": "Was / Ware",
       "deckTitle": "Irregular Verbs",
-      "visualized": false
+      "id": 1,
+      "visualized": true
     },
     {
-      "id": "5",
-      "front": "Two",
-      "back": "2",
+      "front": "Have",
+      "back": "Had",
       "deckTitle": "Irregular Verbs",
-      "visualized": false
+      "id": 2,
+      "visualized": true
     },
     {
-      "id": "6",
-      "front": "Three",
-      "back": "3",
+      "front": "Go",
+      "back": "Went",
       "deckTitle": "Irregular Verbs",
-      "visualized": false
+      "id": 3,
+      "visualized": true
+    },
+    {
+      "front": "Come",
+      "back": "Came",
+      "deckTitle": "Irregular Verbs",
+      "id": 4,
+      "visualized": true
+    },
+    {
+      "front": "Do",
+      "back": "Did",
+      "deckTitle": "Irregular Verbs",
+      "id": 5,
+      "visualized": true
+    },
+    {
+      "front": "Say",
+      "back": "Said",
+      "deckTitle": "Irregular Verbs",
+      "id": 6,
+      "visualized": true
+    },
+    {
+      "front": "Take",
+      "back": "Took",
+      "deckTitle": "Irregular Verbs",
+      "id": 7
+    },
+    {
+      "front": "Make",
+      "back": "Made",
+      "deckTitle": "Irregular Verbs",
+      "id": 8
+    },
+    {
+      "front": "See",
+      "back": "Saw",
+      "deckTitle": "Irregular Verbs",
+      "id": 9
+    },
+    {
+      "front": "Eat",
+      "back": "Ate",
+      "deckTitle": "Irregular Verbs",
+      "id": 10
+    },
+    {
+      "front": "Get",
+      "back": "Got",
+      "deckTitle": "Irregular Verbs",
+      "id": 11
+    },
+    {
+      "front": "Push()",
+      "back": "Adiciona um ou mais elementos ao final do array.",
+      "deckTitle": "Métodos de array - JS",
+      "id": 12,
+      "visualized": true
+    },
+    {
+      "front": "Pop()",
+      "back": "Remove o último elemento do array e o retorna.",
+      "deckTitle": "Métodos de array - JS",
+      "id": 13,
+      "visualized": true
+    },
+    {
+      "front": "Shift()",
+      "back": "Remove o primeiro elemento do array e o retorna.",
+      "deckTitle": "Métodos de array - JS",
+      "id": 14,
+      "visualized": true
+    },
+    {
+      "front": "Unshift()",
+      "back": "Adiciona um ou mais elementos ao início do array.",
+      "deckTitle": "Métodos de array - JS",
+      "id": 15,
+      "visualized": true
+    },
+    {
+      "front": "Splice()",
+      "back": "Altera o conteúdo de um array removendo ou substituindo elementos existentes e/ou adicionando novos elementos.",
+      "deckTitle": "Métodos de array - JS",
+      "id": 16,
+      "visualized": true
     }
   ],
   "users": [
