@@ -1,21 +1,21 @@
-import React from 'react';
-import { appStrings } from '@app/app-strings';
-import { Body } from '@atomic/atm.typography';
-import { VSeparator } from '@atomic/obj.grid';
-import { commonTheme } from '@atomic/obj.theme';
-import { DeckType } from '@app/data/queries/home';
-import { Feather } from 'react-native-vector-icons';
 import SelectDropdown from 'react-native-select-dropdown';
+import { Feather } from 'react-native-vector-icons';
+import { commonTheme } from '@atomic/obj.theme';
+import { appStrings } from '@app/app-strings';
+import { VSeparator } from '@atomic/obj.grid';
+import { Body } from '@atomic/atm.typography';
+import { DeckI } from '@app/model';
+import React from 'react';
 
 interface SelectDropdownButtonProps {
-  data: DeckType[];
+  data: DeckI[];
   onTap: (value: string) => void;
   label: React.JSX.Element;
   errorMessage: string;
 }
 
 interface SelectDropdownProps {
-  data: DeckType[];
+  data: DeckI[];
   onTap: (value: string) => void;
 }
 
