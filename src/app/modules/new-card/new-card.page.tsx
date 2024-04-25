@@ -1,8 +1,7 @@
-import React from 'react';
-import { Text } from 'react-native';
-import { BottomSheet } from '@atomic/mol.modal';
+import { NewDecksAndCardsForm } from './components/atm.new-decks-and-cards-form';
 import { useNavigation } from '@react-navigation/native';
-import { AddNewCard } from './components/atm.add-new-card';
+import { BottomSheet } from '@atomic/mol.modal';
+import React from 'react';
 
 export const NewCardPage = () => {
   const navigation = useNavigation();
@@ -12,7 +11,7 @@ export const NewCardPage = () => {
       onCloseModal={() => navigation.goBack()}
       children={
         <>
-          <AddNewCard />
+          <NewDecksAndCardsForm />
         </>
       }
     />
