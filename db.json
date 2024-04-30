@@ -7,6 +7,10 @@
     {
       "title": "Métodos de array - JS",
       "id": 2
+    },
+    {
+      "title": "S.O.L.I.D",
+      "id": 3
     }
   ],
   "cards": [
@@ -116,6 +120,36 @@
       "deckTitle": "Métodos de array - JS",
       "id": 16,
       "visualized": true
+    },
+    {
+      "front": "S - Single Responsibility Principle (SRP)",
+      "back": "Uma classe deve ter apenas uma razão para mudar, ou seja, deve ter apenas uma responsabilidade.",
+      "deckTitle": "S.O.L.I.D",
+      "id": 17
+    },
+    {
+      "front": "O - Open/Closed Principle (OCP)",
+      "back": "Entidades de software (classes, módulos, funções, etc.) devem estar abertas para extensão, mas fechadas para modificação.",
+      "deckTitle": "S.O.L.I.D",
+      "id": 18
+    },
+    {
+      "front": "L - Liskov Substitution Principle (LSP)",
+      "back": "Objetos de um tipo base devem ser substituíveis por objetos de um tipo derivado sem interromper o funcionamento do programa.",
+      "deckTitle": "S.O.L.I.D",
+      "id": 19
+    },
+    {
+      "front": "I - Interface Segregation Principle (ISP)",
+      "back": "Muitas interfaces específicas são melhores do que uma única interface geral.",
+      "deckTitle": "S.O.L.I.D",
+      "id": 20
+    },
+    {
+      "front": "D - Dependency Inversion Principle (DIP)",
+      "back": "Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações. Abstrações não devem depender de detalhes; detalhes devem depender de abstrações.",
+      "deckTitle": "S.O.L.I.D",
+      "id": 21
     }
   ],
   "users": [
