@@ -11,6 +11,18 @@
     {
       "title": "S.O.L.I.D",
       "id": 3
+    },
+    {
+      "title": "Frases em inglês",
+      "id": 4
+    },
+    {
+      "title": "Versículos bíblicos",
+      "id": 5
+    },
+    {
+      "title": "Hooks - ReactJs",
+      "id": 6
     }
   ],
   "cards": [
@@ -150,6 +162,97 @@
       "back": "Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações. Abstrações não devem depender de detalhes; detalhes devem depender de abstrações.",
       "deckTitle": "S.O.L.I.D",
       "id": 21
+    },
+    {
+      "front": "How are you?",
+      "back": "Como você está?",
+      "deckTitle": "Frases em inglês",
+      "id": 22,
+      "visualized": true
+    },
+    {
+      "front": "Thank you",
+      "back": "Obrigado/a",
+      "deckTitle": "Frases em inglês",
+      "id": 23
+    },
+    {
+      "front": "What's your name?",
+      "back": "Qual é o seu nome",
+      "deckTitle": "Frases em inglês",
+      "id": 24
+    },
+    {
+      "front": "Where are you from?",
+      "back": "De onde você é?",
+      "deckTitle": "Frases em inglês",
+      "id": 25
+    },
+    {
+      "front": "I don't understand.",
+      "back": "Eu não entendo/entendi",
+      "deckTitle": "Frases em inglês",
+      "id": 26
+    },
+    {
+      "front": "Jeremias 29:11",
+      "back": "\"Pois eu sei que os planos que tenho para vocês, diz o Senhor, são planos para o bem e não para o mal, a fim de dar-lhes um futuro e uma esperança.\"",
+      "deckTitle": "Versículos bíblicos",
+      "id": 27
+    },
+    {
+      "front": "Salmo 23:1",
+      "back": "\"O Senhor é meu pastor; nada me faltará.\"",
+      "deckTitle": "Versículos bíblicos",
+      "id": 28
+    },
+    {
+      "front": "Provérbios 3:5",
+      "back": "\"Confia no Senhor de todo o teu coração, e não te estribes no teu próprio entendimento.\"",
+      "deckTitle": "Versículos bíblicos",
+      "id": 29
+    },
+    {
+      "front": "João 3:16",
+      "back": "\"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.\"",
+      "deckTitle": "Versículos bíblicos",
+      "id": 30
+    },
+    {
+      "front": "Filipenses 4:13",
+      "back": "\"Tudo posso naquele que me fortalece.\"",
+      "deckTitle": "Versículos bíblicos",
+      "id": 31
+    },
+    {
+      "front": "useState",
+      "back": "Adiciona estado a componentes de função. Permite definir e atualizar o estado local de um componente.",
+      "deckTitle": "Hooks - ReactJs",
+      "id": 32
+    },
+    {
+      "front": "useEffect",
+      "back": "Executa efeitos colaterais em componentes de função, como buscar dados de uma API, manipular o DOM ou inscrever-se em eventos.",
+      "deckTitle": "Hooks - ReactJs",
+      "id": 33
+    },
+    {
+      "front": "useContext",
+      "back": "Facilita o acesso a um contexto em componentes de função do React. Permite consumir valores de um contexto sem a necessidade de passar props manualmente por todos os níveis.",
+      "deckTitle": "Hooks - ReactJs",
+      "id": 34
+    },
+    {
+      "front": "useRef",
+      "back": "Cria uma referência mutável que pode ser associada a um elemento do DOM ou a um valor qualquer, útil para acessar elementos do DOM ou para manter valores entre re-renderizações.",
+      "deckTitle": "Hooks - ReactJs",
+      "id": 35
+    },
+    {
+      "front": "useReducer",
+      "back": "Alternativa ao useState, mais apropriada para gerenciar estados complexos ou quando o estado depende do estado anterior. Aceita uma função de reducer e retorna o estado atual.",
+      "deckTitle": "Hooks - ReactJs",
+      "id": 36
     }
   ],
   "users": [
