@@ -23,7 +23,7 @@ export function GetDecksProvider({ children }: useDecksQueryProps) {
 
   useEffect(() => {
     setDecks(data);
-    setAmountDecks(data?.length);
+    setAmountDecks(data ? data?.length : 0);
   }, [data]);
 
   return (
