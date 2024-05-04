@@ -23,6 +23,10 @@
     {
       "title": "Hooks - ReactJs",
       "id": 6
+    },
+    {
+      "title": "Frases filosóficas",
+      "id": 7
     }
   ],
   "cards": [
@@ -195,28 +199,31 @@
       "id": 26
     },
     {
+      "front": "João 3:16",
+      "back": "\"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.\"",
+      "deckTitle": "Versículos bíblicos",
+      "id": 30,
+      "visualized": true
+    },
+    {
       "front": "Jeremias 29:11",
       "back": "\"Pois eu sei que os planos que tenho para vocês, diz o Senhor, são planos para o bem e não para o mal, a fim de dar-lhes um futuro e uma esperança.\"",
       "deckTitle": "Versículos bíblicos",
-      "id": 27
+      "id": 27,
+      "visualized": true
     },
     {
       "front": "Salmo 23:1",
       "back": "\"O Senhor é meu pastor; nada me faltará.\"",
       "deckTitle": "Versículos bíblicos",
-      "id": 28
+      "id": 28,
+      "visualized": true
     },
     {
       "front": "Provérbios 3:5",
       "back": "\"Confia no Senhor de todo o teu coração, e não te estribes no teu próprio entendimento.\"",
       "deckTitle": "Versículos bíblicos",
       "id": 29
-    },
-    {
-      "front": "João 3:16",
-      "back": "\"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.\"",
-      "deckTitle": "Versículos bíblicos",
-      "id": 30
     },
     {
       "front": "Filipenses 4:13",
@@ -253,6 +260,12 @@
       "back": "Alternativa ao useState, mais apropriada para gerenciar estados complexos ou quando o estado depende do estado anterior. Aceita uma função de reducer e retorna o estado atual.",
       "deckTitle": "Hooks - ReactJs",
       "id": 36
+    },
+    {
+      "front": "Só sei que nada sei",
+      "back": "A frase \"Só sei que nada sei\" é atribuída ao filósofo grego Sócrates, que viveu em Atenas entre 470 a.C e 399 a.C.",
+      "deckTitle": "Frases filosóficas",
+      "id": 37
     }
   ],
   "users": [
