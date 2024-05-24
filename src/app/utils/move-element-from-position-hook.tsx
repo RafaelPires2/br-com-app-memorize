@@ -1,7 +1,8 @@
-import { CardI } from '@app/model';
-import { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import { LocalDataSource } from '@app/data/local/local.datasource';
 import { useGetCardsContext } from '@app/data/queries/home';
+import { CardI } from '@app/model';
+import { useState } from 'react';
+import axios from 'axios';
 
 // 1- Criar um localStorage, metodos get, set, update, remove
 // 2- buscar os cards do banco e armazenar no storage
@@ -39,6 +40,7 @@ export function useMoveElementFromPosition({ array }: useMoveElementFromPosition
 
     const newArray = [...cardsArray.slice(0, indexForMove), elementRemoved, ...cardsArray.slice(indexForMove)];
 
+    LocalDataSource.set('cardsArray', newArray);
     setArray(newArray);
     handleUpdateCards(newArray);
     handleSetStateVisualizedCard();
